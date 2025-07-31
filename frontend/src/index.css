@@ -1,0 +1,102 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 180 77% 44%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 262 83% 58%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 180 74% 60%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 180 77% 44%;
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-slate-900 text-foreground font-sans;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  /* Glass morphism utilities */
+  .glass {
+    @apply bg-glass backdrop-blur-lg border border-glass-border;
+  }
+  
+  .glass-light {
+    @apply bg-glass-light backdrop-blur-md border border-glass-border;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-800;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-medical-primary rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-medical-accent;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-r from-medical-primary to-medical-accent text-white font-medium px-6 py-3 rounded-xl 
+           shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 
+           border border-medical-primary/20;
+  }
+  
+  .btn-secondary {
+    @apply bg-gradient-to-r from-medical-secondary to-purple-600 text-white font-medium px-6 py-3 rounded-xl 
+           shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 
+           border border-medical-secondary/20;
+  }
+  
+  .card-glass {
+    @apply glass rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 
+           hover:bg-glass-light;
+  }
+  
+  .table-glass {
+    @apply glass rounded-xl overflow-hidden shadow-xl;
+  }
+  
+  .modal-glass {
+    @apply glass rounded-2xl p-8 shadow-2xl border-2 border-glass-border;
+  }
+  
+  .chat-bubble-user {
+    @apply bg-gradient-to-r from-medical-primary to-medical-accent text-white rounded-2xl rounded-br-sm p-4 ml-auto max-w-xs shadow-lg;
+  }
+  
+  .chat-bubble-ai {
+    @apply glass text-white rounded-2xl rounded-bl-sm p-4 mr-auto max-w-xs shadow-lg border border-glass-border;
+  }
+}
