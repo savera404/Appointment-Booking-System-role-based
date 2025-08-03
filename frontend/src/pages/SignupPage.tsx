@@ -61,7 +61,9 @@ const SignupPage: React.FC = () => {
     }
 
     try {
-      const { confirmPassword, ...signupData } = formData;
+      const { confirmPassword, gender, ...rest } = formData;
+      // Exclude empty string gender, as PatientSignupData expects only 'male' | 'female' | 'other'
+      const signupData = { ...rest, gender: gender as 'male' | 'female' | 'other' };
       await signup(signupData);
       toast({
         title: "Account created successfully",
@@ -120,6 +122,7 @@ const SignupPage: React.FC = () => {
                   type="date"
                   value={formData.date_of_birth}
                   onChange={(e) => handleInputChange('date_of_birth', e.target.value)}
+                  className="[&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:brightness-0 [&::-webkit-calendar-picker-indicator]:saturate-100 [&::-webkit-calendar-picker-indicator]:hue-rotate-180deg"
                   required
                 />
               </div>

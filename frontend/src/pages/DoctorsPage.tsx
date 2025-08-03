@@ -159,12 +159,14 @@ const DoctorsPage = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <Label className="text-slate-300">Location</Label>
-                    <Input
+                    <select
                       value={newDoctor.location}
                       onChange={(e) => setNewDoctor({ ...newDoctor, location: e.target.value })}
-                      className="bg-glass border-glass-border text-white"
-                      placeholder="City"
-                    />
+                      className="w-full p-2 bg-glass border border-glass-border rounded-md text-white"
+                    >
+                      <option value="">Select Location</option>
+                      <option value="Karachi">Karachi</option>
+                    </select>
                   </div>
                   <div>
                     <Label className="text-slate-300">Experience (years)</Label>
@@ -220,7 +222,7 @@ const DoctorsPage = () => {
             
             <div className="space-y-2 text-slate-300 mb-4">
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4" />
+                <MapPin className="w-4 h-4 text-slate-300" />
                 <span>{doctor.location}</span>
               </div>
               <div className="flex justify-between">

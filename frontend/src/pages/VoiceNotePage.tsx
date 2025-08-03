@@ -1440,7 +1440,7 @@ const fetchSummary = async () => {
                 <div className="flex-1">
                   <div className="whitespace-pre-wrap">{msg.text}</div>
                   <div className="text-xs text-slate-400 mt-2 flex items-center gap-2">
-                    {msg.isUser ? <User className="w-3 h-3" /> : <Brain className="w-3 h-3" />}
+                    {msg.isUser ? <User className="w-3 h-3 text-slate-400" /> : <Brain className="w-3 h-3 text-slate-400" />}
                     <span>{msg.timestamp.toLocaleTimeString()}</span>
                   </div>
                 </div>
@@ -1506,7 +1506,7 @@ const fetchSummary = async () => {
               className="bg-blue-600 hover:bg-blue-700 text-white px-6"
               disabled={!inputValue.trim() || isTyping}
             >
-              <Send className="w-4 h-4" />
+              <Send className="w-4 h-4 text-white" />
             </Button>
           </div>
 

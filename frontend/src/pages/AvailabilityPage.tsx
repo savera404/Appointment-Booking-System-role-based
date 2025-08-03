@@ -126,7 +126,7 @@ const AvailabilityPage = () => {
           <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
             <DialogTrigger asChild>
               <Button className="btn-primary">
-                <Plus className="w-4 h-4 mr-2" />
+                <Plus className="w-4 h-4 mr-2 text-white" />
                 Add Time Slot
               </Button>
             </DialogTrigger>
@@ -230,7 +230,7 @@ const AvailabilityPage = () => {
                         onClick={() => handleDeleteSlot(slot.id)}
                         className="text-slate-400 hover:text-red-400 hover:bg-glass-light"
                       >
-                        <Trash2 className="w-3 h-3" />
+                        <Trash2 className="w-3 h-3 text-slate-400" />
                       </Button>
                     </div>
                   </div>

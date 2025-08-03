@@ -400,6 +400,7 @@ const AppointmentsPage = () => {
           filteredAppointments.map((appointment) => {
             const fileInputRef = useRef<HTMLInputElement>(null);
             const [keyPoints, setKeyPoints] = useState<string[]>([]);
+            const [isUploading, setIsUploading] = useState(false);
 
             const handleUploadClick = () => fileInputRef.current?.click();
 
@@ -407,6 +408,7 @@ const AppointmentsPage = () => {
               const file = e.target.files?.[0];
               if (!file) return;
 
+              setIsUploading(true);
               const formData = new FormData();
               formData.append("audio_file", file);
               
@@ -429,6 +431,8 @@ const AppointmentsPage = () => {
               } catch (err) {
                 console.error("Upload failed", err);
                 alert("Failed to upload audio");
+              } finally {
+                setIsUploading(false);
               }
             };
 
@@ -459,7 +463,7 @@ const AppointmentsPage = () => {
 
                     {/* Only show voice note features for patients */}
                     {user?.role === 'patient' && appointment.status === "Completed" && (
-                      <div className="mt-4 space-y-3">
+                      <div className="mt-4">
                         <input
                           type="file"
                           accept="audio/*"
@@ -467,14 +471,41 @@ const AppointmentsPage = () => {
                           onChange={handleFileChange}
                           style={{ display: "none" }}
                         />
-                        <Button onClick={handleUploadClick} className="btn-primary">Upload Voice Note</Button>
+                        
+                        {/* Upload indicator */}
+                        {isUploading && (
+                          <div className="mb-3 p-3 bg-medical-primary/10 border border-medical-primary/30 rounded-lg">
+                            <div className="flex items-center gap-2 text-medical-primary">
+                              <div className="w-4 h-4 border-2 border-medical-primary border-t-transparent rounded-full animate-spin"></div>
+                              <span className="text-sm">Uploading audio file...</span>
+                            </div>
+                          </div>
+                        )}
+                        
+                        <div className="flex flex-col sm:flex-row gap-3">
+                          <Button 
+                            onClick={handleUploadClick} 
+                            className="btn-primary flex-1"
+                            disabled={isUploading}
+                          >
+                            {isUploading ? (
+                              <>
+                                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                                Uploading...
+                              </>
+                            ) : (
+                              'Upload Voice Note'
+                            )}
+                          </Button>
 
-                        <Button
-                          className="mt-3 btn-secondary"
-                          onClick={() => navigate(`/voice-note/${appointment.id}`)}
-                        >
-                          Chat About This Appointment
-                        </Button>
+                          <Button
+                            className="btn-secondary flex-1"
+                            onClick={() => navigate(`/voice-note/${appointment.id}`)}
+                            disabled={isUploading}
+                          >
+                            Chat About This Appointment
+                          </Button>
+                        </div>
                       </div>
                     )}
                   </div>
